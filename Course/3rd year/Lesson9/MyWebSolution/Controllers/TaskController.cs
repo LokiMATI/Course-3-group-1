@@ -18,6 +18,8 @@ namespace MyWebSolution.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            var Tasks = _taskManager.GetAllTasks();
+            if (Tasks == null) return NotFound();
             return Ok(_taskManager.GetAllTasks);
         }
 
@@ -28,7 +30,7 @@ namespace MyWebSolution.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Core.Task task)
+        public IActionResult Post([FromBody]Core.Task task)
         {
             _taskManager.AddTask(task);
             return Ok();
