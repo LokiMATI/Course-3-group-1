@@ -12,15 +12,13 @@ namespace MyWebSolution.Controllers
         private ITaskManager _taskManager;
         public TaskController(TaskDbContext context)
         {
-            _taskManager = new TaskManager(context);
+            _taskManager = new ITaskManager(context);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            var Tasks = _taskManager.GetAllTasks();
-            if (Tasks == null) return NotFound();
-            return Ok(_taskManager.GetAllTasks);
+            return Ok(_taskManager.GetAllTasks());
         }
 
         [HttpGet("{id}")]
